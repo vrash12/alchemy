@@ -40,7 +40,13 @@ Open `http://127.0.0.1:8123/classroom`, then select **Join Meeting**. `/classroo
 
 ## Free demonstration hosting
 
-The repository includes a production-oriented multi-stage `Dockerfile` and a Render Blueprint in `render.yaml`. Render is appropriate for this trial because its free web service can run a Dockerized PHP application and provides a public HTTPS address. It is demonstration hosting: free services sleep after inactivity and the first request after sleeping can take about a minute.
+Live demonstration: [Open Alchemy Classroom](https://alchemy-bbb-trial-464796395656.asia-southeast1.run.app/classroom)
+
+The application is deployed on Google Cloud Run in `asia-southeast1` with request-based billing, zero minimum instances, and one maximum instance. Pushes to `main` automatically build and deploy through Cloud Build. The service uses Cloud Run's public HTTPS endpoint and keeps Laravel and BBB configuration in revision environment variables.
+
+The repository also includes a Render Blueprint in `render.yaml` as an alternative deployment path. Render's free service can run the same Dockerized PHP application, but it is not used by the live demonstration above.
+
+To deploy the Render alternative:
 
 1. Sign in to [Render](https://dashboard.render.com/) with GitHub.
 2. Choose **New → Blueprint** and select this repository.
