@@ -1,0 +1,11 @@
+.git
+.env
+.env.*
+!.env.example
+vendor
+node_modules
+bbb-plugin/resources-plugin/node_modules
+bbb-plugin/resources-plugin/dist
+public/build
+storage/logs/*.log
+.phpunit.cache

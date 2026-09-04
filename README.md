@@ -38,6 +38,25 @@ php artisan serve --host=127.0.0.1 --port=8123
 
 Open `http://127.0.0.1:8123/classroom`, then select **Join Meeting**. `/classroom/join` is a CSRF-protected POST action and should not be opened directly.
 
+## Free demonstration hosting
+
+The repository includes a production-oriented multi-stage `Dockerfile` and a Render Blueprint in `render.yaml`. Render is appropriate for this trial because its free web service can run a Dockerized PHP application and provides a public HTTPS address. It is demonstration hosting: free services sleep after inactivity and the first request after sleeping can take about a minute.
+
+1. Sign in to [Render](https://dashboard.render.com/) with GitHub.
+2. Choose **New → Blueprint** and select this repository.
+3. Render reads `render.yaml`; keep the **Free** service plan.
+4. When prompted, enter `APP_KEY`, `BBB_URL`, and `BBB_SECRET` as secret environment values.
+5. Generate `APP_KEY` locally with `php artisan key:generate --show`.
+6. After deployment, open `https://<your-service>.onrender.com/classroom`.
+
+To test Resources, add this environment variable after the first deployment:
+
+```text
+BBB_RESOURCES_PLUGIN_MANIFEST_URL=https://<your-service>.onrender.com/bbb-plugins/resources/manifest.json
+```
+
+The demo BBB provider currently ignores custom manifests, but this stable HTTPS address can be used with a BBB server that permits them. GitHub Pages and static-only hosting are not suitable because Laravel needs a PHP server to sign BBB requests securely.
+
 ### Public demo used for development
 
 On 4 September 2026, Part 1 was tested successfully against Blindside Networks' public BBB demo endpoint referenced by BigBlueButton's official Greenlight installer. The working copy's ignored `.env` is configured for that demo, so the local page can be tried immediately. Do not commit or depend on those shared demo credentials for a submitted or production system.

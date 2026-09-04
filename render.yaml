@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: alchemy-bbb-trial
+    runtime: docker
+    plan: free
+    region: singapore
+    healthCheckPath: /classroom
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      - key: APP_KEY
+        sync: false
+      - key: LOG_CHANNEL
+        value: stderr
+      - key: SESSION_DRIVER
+        value: cookie
+      - key: CACHE_STORE
+        value: array
+      - key: QUEUE_CONNECTION
+        value: sync
+      - key: BBB_URL
+        sync: false
+      - key: BBB_SECRET
+        sync: false
+      - key: BBB_CHECKSUM_ALGORITHM
+        value: sha1
